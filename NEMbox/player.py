@@ -227,6 +227,10 @@ class Player(object):
         self.build_playinfo()
 
     def run_mpg123(self, on_exit, url, expires=-1, get_time=-1):
+        if url is None:
+            self.next()
+            return -1
+
         para = ["mpg123", "-R"] + self.config_mpg123
         self.popen_handler = subprocess.Popen(
             para, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE
